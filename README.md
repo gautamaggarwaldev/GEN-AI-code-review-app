@@ -3,7 +3,9 @@
 ## Professional Code Review & Translation Tool
 
 ![CodeGGlance Logo](assets/logo.jpeg)
-![CodeGGlance demoVideo](assets/code%20review.mp4)
+
+
+![demo](assets/code-review.mp4)
 
 CodeGGlance is a powerful web application designed to streamline your development workflow by providing instant code reviews and seamless translation between programming languages. Our intuitive interface allows developers to quickly analyze code quality and convert between various programming languages with a single click.
 
