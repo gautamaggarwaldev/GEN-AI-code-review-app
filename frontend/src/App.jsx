@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 function App() {
   const [code, setCode] = useState("");
   const [reviewResult, setReviewResult] = useState("");
@@ -8,6 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
   const [error, setError] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   // List of programming languages for the dropdown
   const programmingLanguages = [
@@ -27,6 +29,32 @@ function App() {
     "Scala",
     "R",
   ];
+
+  // Function to show popup every 15 seconds
+  useEffect(() => {
+    const popupInterval = setInterval(() => {
+      setShowPopup(true);
+      
+      // Hide popup after 5 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 5000);
+    }, 15000);
+
+    // Show popup immediately on first load
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(popupInterval);
+  }, []);
+
+  // Function to redirect to chat
+  const redirectToChat = () => {
+    window.location.href = 'http://localhost:8501/';
+  };
 
   // Function to get code review
   const getCodeReview = async () => {
@@ -380,6 +408,36 @@ function App() {
             </div>
           </div>
         )}
+
+        {/* Chat Bot Icon */}
+        <div 
+          className="fixed bottom-6 right-6 cursor-pointer z-50"
+          onClick={redirectToChat}
+        >
+          {/* Bot Icon */}
+          <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg hover:bg-blue-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+          </div>
+          
+          {/* Popup Notification */}
+          {showPopup && (
+            <div className="absolute bottom-20 right-0 bg-white rounded-lg shadow-xl p-4 w-64 text-gray-800 border border-gray-200 animate-bounce">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm font-medium">Need help with your code?</p>
+                  <p className="text-xs mt-1">Click to chat with our AI assistant!</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

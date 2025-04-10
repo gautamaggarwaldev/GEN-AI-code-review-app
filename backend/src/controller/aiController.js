@@ -19,6 +19,7 @@ const ReviewByAI = async (req, res) => {
         }
 
         const result = await generateContentService({ code, translateTo });
+        console.log("Result from AI : ", result);
 
         return res.status(200).json({
             success: true,
