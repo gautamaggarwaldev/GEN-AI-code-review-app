@@ -5,7 +5,8 @@
 ![CodeGGlance Logo](assets/logo.jpeg)
 
 
-![demo](assets/code-review.mp4)
+https://github.com/user-attachments/assets/7f062305-a1cc-48d0-80bb-cfb9abae0c9b
+
 
 CodeGGlance is a powerful web application designed to streamline your development workflow by providing instant code reviews and seamless translation between programming languages. Our intuitive interface allows developers to quickly analyze code quality and convert between various programming languages with a single click.
 
